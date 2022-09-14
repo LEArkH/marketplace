@@ -75,9 +75,9 @@ public class ClientServiceImpl implements ClientServices {
 
     @Override
     public ResponseEntity<Object> patchClient(Long id, PatchClientDTO patchClientDTO) {
-        Client clienteActualizar = (Client)this.clientRepository.findById(id).orElse(null);
+        Client clienteActualizar = clientRepository.findById(id).orElse(null);
         if (clienteActualizar == null) {
-            return new ResponseEntity("Cliente no encontrado", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Cliente no encontrado", HttpStatus.FORBIDDEN);
         } else {
             if (patchClientDTO.getFirstName() != null) {
                 clienteActualizar.setFirstName(patchClientDTO.getFirstName());
@@ -100,7 +100,7 @@ public class ClientServiceImpl implements ClientServices {
             }
 
             this.clientRepository.save(clienteActualizar);
-            return new ResponseEntity("Cliente actualizado", HttpStatus.CREATED);
+            return new ResponseEntity<>("Cliente actualizado", HttpStatus.CREATED);
         }
     }
 
@@ -108,7 +108,7 @@ public class ClientServiceImpl implements ClientServices {
     public ResponseEntity<Object> deleteClient(Long id) {
         Client clienteABorrar = clientRepository.findById(id).orElse(null);
         if (clienteABorrar == null) {
-            return new ResponseEntity("El cliente indicado no existe", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("El cliente indicado no existe", HttpStatus.FORBIDDEN);
         } else {
             ShoppingCart shoppingCartAsociado = shoppingCartRepository.findById(id).orElse(null);
             Set<Invoice> invoiceSet = shoppingCartAsociado.getInvoices();
@@ -121,7 +121,7 @@ public class ClientServiceImpl implements ClientServices {
 
 
             clientRepository.deleteById(clienteABorrar.getId());
-            return new ResponseEntity("Cliente eliminado", HttpStatus.OK);
+            return new ResponseEntity<>("Cliente eliminado", HttpStatus.OK);
         }
     }
 
