@@ -64,11 +64,6 @@ public class MarketplaceApplication {
 			paymentRepository.save(payment1);
 			paymentRepository.save(payment2);
 			paymentRepository.save(payment3);
-
-			//Invoice invoice1 = new Invoice(600.00, LocalDate.now(),3,cart1,payment2);
-			//invoiceRepository.save(invoice1);
-
-			System.out.println("Hasta aca esta todo bien :D");
 		};
 	}
 }
